@@ -4,6 +4,20 @@ Aplicación web para consultar un catálogo de teléfonos móviles, buscar por m
 
 **Demo:** _pendiente de desplegar_
 
+| Listado                                                            | Detalle                                                                                         |
+| ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
+| ![Listado de teléfonos con buscador](docs/screenshots/listing.png) | ![Detalle de un teléfono con selectores de almacenamiento y color](docs/screenshots/detail.png) |
+
+| Especificaciones y similares                                                          | Carrito                                                                          |
+| ------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| ![Tabla de especificaciones y productos similares](docs/screenshots/detail-specs.png) | ![Carrito con una línea, total y continuar comprando](docs/screenshots/cart.png) |
+
+## Alcance y simplicidad
+
+El código prioriza la simplicidad sobre la flexibilidad especulativa: se implementa lo que pide el enunciado y el diseño de Figma, sin abstracciones genéricas para casos hipotéticos ni infraestructura que ningún requisito necesita todavía (más detalle en [Testing y calidad](#testing-y-calidad)). Es más fácil de auditar y razonar sobre él, y en una prueba de alcance cerrado y plazo corto eso importa más que preparar el terreno para requisitos que no existen.
+
+Por el mismo motivo no se usa desarrollo dirigido por especificaciones (SDD): documentar cada requisito con un ID propio, decisiones en ADRs y trazabilidad explícita entre requisito, código y test. En un proyecto real, con varios equipos trabajando en paralelo durante meses y requisitos que cambian, esa trazabilidad es lo que permite saber por qué existe una decisión sin depender de la memoria de quien la tomó, y evita que dos personas interpreten el mismo requisito de formas distintas. Aquí el enunciado y el diseño ya cumplen ese papel de especificación única: documentarlos otra vez en un formato aparte duplicaría la misma información sin la trazabilidad que la justificaría.
+
 ## Cómo ejecutar
 
 Requisitos: Node.js ≥ 18.18 y npm.
@@ -56,6 +70,7 @@ Cada componente con lógica lleva su test al lado (`X.test.tsx`).
 - Jest + Testing Library para lógica y componentes; `jest-axe` en los componentes principales para accesibilidad automatizada.
 - ESLint (config de Next + `jsx-a11y`) y Prettier.
 - Consola del navegador limpia en desarrollo y producción.
+- Alcance de herramientas ajustado al tamaño del proyecto: sin hooks de Git, linter de commits, linter de estilos aparte ni pruebas end-to-end. El flujo de verificación manual (typecheck, lint, tests y build antes de cada commit) ya cubre lo que esas herramientas automatizarían, y los tests de componentes ya ejercitan las mismas interacciones de usuario que cubriría un end-to-end.
 
 ## Despliegue
 
