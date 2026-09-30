@@ -43,11 +43,13 @@
   --border-thin: 0.5px solid var(--color-text);
   --border-selector: 1px solid var(--color-border-light);
   --border-selected: 1px solid var(--color-text);
+  --border-button: 0.5px solid var(--color-primary);
 
   --header-height: 80px;
   --gutter: 16px;
   --button-height: 56px;
   --button-padding: 20px var(--space-6);
+  --button-min-width: 260px;
 
   // Detail (Figma detail frame)
   --detail-max-width: 1200px;
@@ -64,6 +66,13 @@
   --swatch-size: 20px;
   --specs-label-width: 300px;
   --carousel-card-size: min(344px, 80vw);
+
+  // Cart (Figma cart frame)
+  --cart-image-width: 262px;
+  --cart-image-ratio: 262 / 324;
+  --cart-info-gap: 20px;
+  --cart-footer-bottom: 56px;
+  --cart-footer-gap: 80px;
 
   --duration: 300ms;
   --duration-slow: 600ms; // prototype transitions: color image, grid FLIP

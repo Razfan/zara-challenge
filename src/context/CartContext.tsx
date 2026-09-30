@@ -55,15 +55,19 @@ function readStoredCart(): CartItem[] {
   }
 }
 
-type Cart = {
+export type Cart = {
   items: CartItem[];
   count: number;
   total: number;
+  /** False until the persisted cart has been read, so an empty cart is never shown by mistake. */
+  hydrated: boolean;
   add: (item: Omit<CartItem, 'lineId'>) => void;
   remove: (lineId: string) => void;
 };
 
-const CartContext = createContext<Cart | null>(null);
+// Exported so tests can provide a `Cart` value directly, such as the transient
+// `hydrated: false` state that resolves synchronously in jsdom.
+export const CartContext = createContext<Cart | null>(null);
 
 // Starts empty on both server and first client render, then loads the persisted
 // cart in an effect so hydration never mismatches.
@@ -96,10 +100,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
       items,
       count: items.length,
       total: items.reduce((sum, item) => sum + item.storage.price, 0),
+      hydrated,
       add,
       remove,
     }),
-    [items, add, remove],
+    [items, hydrated, add, remove],
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

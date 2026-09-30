@@ -1,0 +1,110 @@
+@use '../../styles/mixins' as *;
+
+// Figma cart footer. Mobile: TOTAL on top, buttons side by side at full width.
+// Laptop up: CONTINUE SHOPPING on the left; TOTAL (gap 24px) and PAY on the right, gap 80px.
+.summary {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+
+  @include bp(laptop) {
+    flex-flow: row wrap;
+    align-items: center;
+    gap: var(--space-3) var(--cart-footer-gap);
+  }
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-5);
+  font-size: var(--fs-md);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-md);
+  text-transform: uppercase;
+
+  @include bp(laptop) {
+    order: 1;
+    margin-inline-start: auto;
+  }
+}
+
+.actions {
+  display: flex;
+  gap: var(--space-3);
+
+  @include bp(laptop) {
+    display: contents;
+  }
+}
+
+.continue,
+.pay {
+  display: inline-flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  height: var(--button-height);
+  padding-inline: var(--space-2);
+  font-size: var(--fs-btn);
+  line-height: var(--lh-btn);
+  letter-spacing: var(--ls-btn);
+  text-align: center;
+  text-transform: uppercase;
+
+  @include bp(laptop) {
+    flex: 0 0 var(--button-min-width);
+  }
+}
+
+// Secondary button.
+.continue {
+  border: var(--border-button);
+
+  @include bp(laptop) {
+    order: 0;
+  }
+}
+
+// Primary button.
+.pay {
+  font-family: inherit;
+  font-weight: inherit;
+  color: var(--color-on-primary);
+  cursor: pointer;
+  background-color: var(--color-primary);
+  border: 0;
+
+  @include bp(laptop) {
+    order: 2;
+  }
+}
+
+// Fades out with the last line; CONTINUE SHOPPING stays.
+.total[data-leaving],
+.pay[data-leaving] {
+  pointer-events: none;
+  animation: fade-out var(--duration-slow) var(--easing) forwards;
+}
+
+@keyframes fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+.message {
+  font-size: var(--fs-sm);
+  line-height: var(--lh-sm);
+
+  @include bp(laptop) {
+    flex-basis: 100%;
+    order: 3;
+    text-align: end;
+  }
+
+  // Out of the flow while empty, but kept in the accessibility tree for the next update.
+  &:empty {
+    @include visually-hidden;
+  }
+}

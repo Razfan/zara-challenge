@@ -1,0 +1,74 @@
+@use '../../styles/mixins' as *;
+
+// Figma cart item: image 262 × 324, gap 40px; info padding `40px 0`, gap 20px, "Eliminar" at the bottom.
+.item {
+  display: flex;
+  gap: var(--space-4);
+
+  @include bp(tablet) {
+    gap: var(--space-7);
+  }
+
+  // Figma prototype: a removed line fades out before it leaves the list.
+  &[data-leaving] {
+    pointer-events: none;
+    animation: fade-out var(--duration-slow) var(--easing) forwards;
+  }
+}
+
+@keyframes fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+.imageWrapper {
+  position: relative;
+  flex-shrink: 0;
+  width: min(40%, var(--cart-image-width));
+  aspect-ratio: var(--cart-image-ratio);
+}
+
+.image {
+  object-fit: contain;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-5);
+  min-width: 0;
+  padding-block: var(--space-4);
+  font-size: var(--fs-sm);
+  line-height: var(--lh-sm);
+  text-transform: uppercase;
+
+  @include bp(tablet) {
+    padding-block: var(--space-7);
+  }
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cart-info-gap);
+}
+
+.titles {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+// Figma "Eliminar": 12px, red, text-only button.
+.remove {
+  align-self: flex-start;
+  padding: 0;
+  font: inherit;
+  color: var(--color-danger);
+  text-transform: none;
+  cursor: pointer;
+  background: none;
+  border: 0;
+}

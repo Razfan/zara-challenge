@@ -1,0 +1,43 @@
+@use '../../styles/mixins' as *;
+
+// Fills the viewport under the header so the footer sits at the bottom even with few lines.
+.cart {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100dvh - var(--header-height));
+}
+
+// Figma: "CART (N)" 24px, 48px under the header.
+.title {
+  padding: var(--space-8) var(--gutter) 0;
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-light);
+  line-height: var(--lh-xl);
+  text-transform: uppercase;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding: var(--space-8) var(--gutter);
+  margin: 0;
+}
+
+// Figma footer, fixed at the bottom: padding `24px <gutter> 56px`. Sticky rather than fixed,
+// so it never covers the last line.
+.footer {
+  position: sticky;
+  bottom: 0;
+  padding: var(--space-5) var(--gutter);
+  margin-top: auto;
+  background-color: var(--color-bg);
+
+  @include bp(laptop) {
+    padding-bottom: var(--cart-footer-bottom);
+  }
+}
+
+.visuallyHidden {
+  @include visually-hidden;
+}
