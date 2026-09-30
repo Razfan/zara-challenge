@@ -1,5 +1,7 @@
 @use '../../styles/mixins' as *;
 
+// Figma "Similar items": 20px title, horizontal list of 344px cards and a 1px custom
+// scrollbar (#CCC track, 150px black thumb).
 .similar {
   display: flex;
   flex-direction: column;
@@ -13,19 +15,28 @@
   text-transform: uppercase;
 }
 
-// Native scroll with snap: touch, trackpad, keyboard (the region is focusable) and the
-// browser's own scrollbar all work as usual.
 .carousel {
   overflow-x: auto;
   overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
+  scrollbar-width: none; // Replaced by the Figma progress bar.
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   &:focus-visible {
     @include focus-ring;
   }
+
+  // While the thumb is dragged; releasing it snaps to a card again.
+  &[data-dragging='true'] {
+    scroll-snap-type: none;
+  }
 }
 
-// Left border here; each card cell draws the rest.
+// Left border here; each card cell draws the rest. A single 0.5px top border on the whole
+// scrolled list was dropped by Chrome while scrolling, so every cell draws its own.
 .list {
   display: flex;
   width: max-content;
@@ -35,5 +46,38 @@
     flex: 0 0 var(--carousel-card-size);
     scroll-snap-align: start;
     border-top: var(--border-thin);
+  }
+}
+
+// Taller than the 1px line so the mouse can hit it; only the line is drawn.
+.progress {
+  position: relative;
+  padding-block: var(--space-2);
+  cursor: pointer;
+  touch-action: none;
+
+  &::before {
+    display: block;
+    height: 1px;
+    content: '';
+    background-color: var(--color-border-light);
+  }
+}
+
+.thumb {
+  position: absolute;
+  inset-block: 0; // As tall as the bar's hit area, so it can be grabbed.
+  left: calc(var(--scroll-progress, 0) * (100% - var(--carousel-thumb-width)));
+  width: var(--carousel-thumb-width);
+  cursor: grab;
+
+  &::before {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    height: 1px;
+    content: '';
+    background-color: var(--color-text);
+    transform: translateY(-50%);
   }
 }
