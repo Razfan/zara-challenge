@@ -18,11 +18,17 @@
   --lh-xs: 12px;
   --fs-sm: 12px;
   --lh-sm: 15px;
+  --fs-btn: 12px;
+  --lh-btn: 16px;
+  --ls-btn: 0.08em;
   --fs-md: 14px;
+  --lh-md: 17px;
   --fs-base: 16px;
   --lh-base: 19px;
   --fs-lg: 20px;
+  --lh-lg: 24px;
   --fs-xl: 24px;
+  --lh-xl: 29px;
 
   --space-1: 4px;
   --space-2: 8px;
@@ -35,9 +41,30 @@
   --space-9: 64px;
 
   --border-thin: 0.5px solid var(--color-text);
+  --border-selector: 1px solid var(--color-border-light);
+  --border-selected: 1px solid var(--color-text);
 
   --header-height: 80px;
   --gutter: 16px;
+  --button-height: 56px;
+  --button-padding: 20px var(--space-6);
+
+  // Detail (Figma detail frame)
+  --detail-max-width: 1200px;
+  --detail-image-width: 510px;
+  --detail-image-ratio: 510 / 630;
+  --detail-info-width: 380px;
+  --detail-columns-gap: 170px;
+  --detail-title-gap: 11px;
+  --detail-sections-gap: 110px;
+  --detail-bottom-padding: 104px;
+  --storage-option-width: 95px;
+  --storage-option-height: 65px;
+  --swatch-box-size: 24px;
+  --swatch-size: 20px;
+  --specs-label-width: 300px;
+  --carousel-card-size: min(344px, 80vw);
+
   --duration: 300ms;
   --duration-slow: 600ms; // prototype transitions: color image, grid FLIP
   --easing: ease-out;

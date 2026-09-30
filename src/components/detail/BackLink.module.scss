@@ -1,0 +1,9 @@
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-3) var(--gutter);
+  font-size: var(--fs-sm);
+  line-height: var(--lh-sm);
+  text-transform: uppercase;
+}

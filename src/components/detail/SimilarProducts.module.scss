@@ -1,0 +1,39 @@
+@use '../../styles/mixins' as *;
+
+.similar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-7);
+}
+
+.title {
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-light);
+  line-height: var(--lh-lg);
+  text-transform: uppercase;
+}
+
+// Native scroll with snap: touch, trackpad, keyboard (the region is focusable) and the
+// browser's own scrollbar all work as usual.
+.carousel {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+}
+
+// Left border here; each card cell draws the rest.
+.list {
+  display: flex;
+  width: max-content;
+  border-left: var(--border-thin);
+
+  > li {
+    flex: 0 0 var(--carousel-card-size);
+    scroll-snap-align: start;
+    border-top: var(--border-thin);
+  }
+}

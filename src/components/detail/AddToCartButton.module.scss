@@ -1,0 +1,30 @@
+@use '../../styles/mixins' as *;
+
+.wrapper {
+  display: flex;
+}
+
+// Figma primary button, full width of the info column.
+.button {
+  width: 100%;
+  height: var(--button-height);
+  padding: var(--button-padding);
+  font-size: var(--fs-btn);
+  line-height: var(--lh-btn);
+  color: var(--color-on-primary);
+  letter-spacing: var(--ls-btn);
+  text-transform: uppercase;
+  cursor: pointer;
+  background-color: var(--color-primary);
+  border: 0;
+
+  &[aria-disabled='true'] {
+    color: var(--color-disabled-text);
+    cursor: not-allowed;
+    background-color: var(--color-disabled-bg);
+  }
+}
+
+.visuallyHidden {
+  @include visually-hidden;
+}

@@ -1,0 +1,80 @@
+@use '../../styles/mixins' as *;
+
+// Figma detail: 510 × 630 image and 380px info in a row; stacked on mobile.
+.configurator {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+
+  @include bp(tablet) {
+    flex-direction: row;
+    gap: var(--space-6);
+    align-items: center;
+  }
+
+  @include bp(laptop) {
+    gap: var(--space-9);
+  }
+
+  @include bp(desktop) {
+    gap: var(--detail-columns-gap);
+  }
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: var(--detail-image-ratio);
+
+  @include bp(tablet) {
+    flex: 0 1 var(--detail-image-width);
+  }
+}
+
+// The selected color's image fades in; the reduced-motion global rule turns it into
+// an instant swap. Remounted on every color change, so there is no image to fade out.
+.image {
+  object-fit: contain;
+  animation: fade-in var(--duration-slow) var(--easing);
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-9);
+  min-width: 0;
+
+  @include bp(tablet) {
+    flex: 0 1 var(--detail-info-width);
+  }
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--detail-title-gap);
+}
+
+.name {
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-light);
+  line-height: var(--lh-xl);
+  text-transform: uppercase;
+}
+
+.price {
+  font-size: var(--fs-lg);
+  line-height: var(--lh-lg);
+}
+
+.selectors {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-7);
+}

@@ -1,0 +1,47 @@
+@use '../../styles/mixins' as *;
+
+.specs {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-7);
+}
+
+.title {
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-light);
+  line-height: var(--lh-lg);
+  text-transform: uppercase;
+}
+
+.table {
+  width: 100%;
+  font-size: var(--fs-sm);
+  line-height: var(--lh-sm);
+  border-collapse: collapse;
+}
+
+.row {
+  border-bottom: var(--border-thin);
+
+  &:first-child {
+    border-top: var(--border-thin);
+  }
+}
+
+.label,
+.value {
+  padding: var(--space-4) 0;
+  text-align: left;
+  vertical-align: top;
+}
+
+.label {
+  width: 40%;
+  padding-right: var(--space-8);
+  font-weight: var(--fw-light);
+  text-transform: uppercase;
+
+  @include bp(tablet) {
+    width: calc(var(--specs-label-width) + var(--space-8));
+  }
+}

@@ -1,0 +1,9 @@
+// Figma detail: 1200px container centered; similar items end with extra bottom padding.
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-9);
+  max-width: calc(var(--detail-max-width) + 2 * var(--gutter));
+  padding: var(--space-6) var(--gutter) var(--detail-bottom-padding);
+  margin-inline: auto;
+}

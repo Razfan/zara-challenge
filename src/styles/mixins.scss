@@ -22,3 +22,10 @@ $breakpoints: (
   clip-path: inset(50%);
   white-space: nowrap;
 }
+
+// For custom controls whose real input is visually hidden: `:focus-visible` on the
+// input itself would be invisible, so the wrapper shows the ring via `:has()`.
+@mixin focus-ring {
+  outline: 1px solid var(--color-text);
+  outline-offset: 2px;
+}
