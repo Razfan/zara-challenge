@@ -1,0 +1,91 @@
+// Borders are shared with the neighbours: the grid draws top/left, each cell right/bottom.
+.cell {
+  border-right: var(--border-thin);
+  border-bottom: var(--border-thin);
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  aspect-ratio: 1;
+  padding: var(--space-4);
+  isolation: isolate;
+  transition: color var(--duration) var(--easing);
+
+  // Figma "Fill" layer: grows from the bottom (transform only).
+  &::before {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    content: '';
+    background-color: var(--color-text);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform var(--duration) var(--easing);
+  }
+
+  &:hover,
+  &:focus-visible {
+    color: var(--color-bg);
+  }
+
+  &:hover::before,
+  &:focus-visible::before {
+    transform: scaleY(1);
+  }
+
+  // The fill itself is the focus indicator; the ring stays inside the cell.
+  &:focus-visible {
+    outline-color: var(--color-bg);
+    outline-offset: calc(-1 * var(--space-1));
+  }
+}
+
+.imageWrapper {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+}
+
+.image {
+  object-fit: contain;
+}
+
+.info {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-2);
+  text-transform: uppercase;
+}
+
+.titles {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.brand {
+  font-size: var(--fs-xs);
+  line-height: var(--lh-xs);
+  color: var(--color-muted);
+  transition: color var(--duration) var(--easing);
+
+  .card:hover &,
+  .card:focus-visible & {
+    color: inherit;
+  }
+}
+
+.name,
+.price {
+  font-size: var(--fs-sm);
+  line-height: var(--lh-sm);
+}
+
+.price {
+  flex-shrink: 0;
+}

@@ -1,0 +1,23 @@
+// Out of flow so showing it never shifts the layout; the header is always the same height.
+.loadingBar {
+  position: absolute;
+  top: var(--header-height);
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: var(--color-text);
+  transform-origin: left;
+
+  // Transform only. Under reduced motion it ends as a static full line.
+  animation: progress 1.2s var(--easing) infinite forwards;
+}
+
+@keyframes progress {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}

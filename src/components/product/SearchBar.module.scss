@@ -1,0 +1,49 @@
+@use '../../styles/mixins' as *;
+
+.searchBar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  border-bottom: var(--border-thin);
+
+  // Focus thickens the Figma underline (a shadow, so nothing moves) instead of boxing the input.
+  &:has(.input:focus-visible) {
+    box-shadow: 0 1px 0 var(--color-text);
+  }
+}
+
+.label {
+  @include visually-hidden;
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  padding: 0 0 var(--space-2);
+  font-size: var(--fs-base);
+  line-height: var(--lh-base);
+  background: none;
+  border: 0;
+  border-radius: 0;
+  appearance: none;
+
+  // The underline above is the focus indicator.
+  &:focus-visible {
+    outline: none;
+  }
+
+  &::placeholder {
+    color: var(--color-placeholder);
+    opacity: 1;
+  }
+
+  // Our own clear button replaces the native one.
+  &::-webkit-search-cancel-button {
+    appearance: none;
+  }
+}
+
+.clear {
+  display: flex;
+  padding: 0 0 var(--space-2);
+}

@@ -1,0 +1,35 @@
+@use '../../styles/mixins' as *;
+
+// Each cell draws its right and bottom border; the grid adds top and left so every
+// line is 0.5px, including a partial last row.
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  margin-inline: var(--gutter);
+  border-top: var(--border-thin);
+  border-left: var(--border-thin);
+
+  // Empty result: no stray border lines.
+  &:empty {
+    border: 0;
+  }
+}
+
+@include bp(tablet) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+// Not in Figma (only 5 / 2 / 1): 4 columns keep cells close to the 344px desktop size.
+@include bp(laptop) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@include bp(desktop) {
+  .grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}

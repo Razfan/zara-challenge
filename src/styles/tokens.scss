@@ -15,9 +15,12 @@
   --fw-light: 300;
   --fw-regular: 400;
   --fs-xs: 10px;
+  --lh-xs: 12px;
   --fs-sm: 12px;
+  --lh-sm: 15px;
   --fs-md: 14px;
   --fs-base: 16px;
+  --lh-base: 19px;
   --fs-lg: 20px;
   --fs-xl: 24px;
 
@@ -36,6 +39,8 @@
   --header-height: 80px;
   --gutter: 16px;
   --duration: 300ms;
+  --duration-slow: 600ms; // prototype transitions: color image, grid FLIP
+  --easing: ease-out;
 
   @include bp(tablet) {
     --gutter: 32px;

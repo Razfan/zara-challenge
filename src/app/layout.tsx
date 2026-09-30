@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
+import { LoadingBar } from '@/components/layout/LoadingBar';
 import { Navbar } from '@/components/layout/Navbar';
 import { CartProvider } from '@/context/CartContext';
+import { NavigationProgressProvider } from '@/context/NavigationProgressContext';
 import '@/styles/globals.scss';
 
 export const metadata: Metadata = {
@@ -14,8 +16,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en">
       <body>
         <CartProvider>
-          <Navbar />
-          <main>{children}</main>
+          <NavigationProgressProvider>
+            <Navbar />
+            <LoadingBar />
+            <main>{children}</main>
+          </NavigationProgressProvider>
         </CartProvider>
       </body>
     </html>
