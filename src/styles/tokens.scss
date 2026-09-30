@@ -1,0 +1,51 @@
+@use 'mixins' as *;
+
+:root {
+  --color-bg: #fff;
+  --color-text: #000;
+  --color-muted: #79736d;
+  --color-placeholder: #aaa;
+  --color-border-light: #ccc;
+  --color-primary: #1b1a18;
+  --color-on-primary: #fff;
+  --color-disabled-bg: #f3f2f2;
+  --color-disabled-text: #c2bfbc;
+  --color-danger: #df0000;
+
+  --fw-light: 300;
+  --fw-regular: 400;
+  --fs-xs: 10px;
+  --fs-sm: 12px;
+  --fs-md: 14px;
+  --fs-base: 16px;
+  --fs-lg: 20px;
+  --fs-xl: 24px;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 40px;
+  --space-8: 48px;
+  --space-9: 64px;
+
+  --border-thin: 0.5px solid var(--color-text);
+
+  --header-height: 80px;
+  --gutter: 16px;
+  --duration: 300ms;
+
+  @include bp(tablet) {
+    --gutter: 32px;
+  }
+
+  @include bp(laptop) {
+    --gutter: 48px;
+  }
+
+  @include bp(desktop) {
+    --gutter: 100px;
+  }
+}
