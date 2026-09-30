@@ -1,0 +1,39 @@
+// Shared by error.tsx and not-found.tsx: not in Figma, built from existing tokens.
+.status {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-5);
+  padding: var(--space-8) var(--gutter);
+}
+
+.title {
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-light);
+  line-height: var(--lh-xl);
+  text-transform: uppercase;
+}
+
+.message {
+  font-size: var(--fs-sm);
+  line-height: var(--lh-sm);
+}
+
+// Secondary button, like CONTINUE SHOPPING.
+.action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--button-min-width);
+  height: var(--button-height);
+  padding: var(--button-padding);
+  font-family: inherit;
+  font-size: var(--fs-btn);
+  line-height: var(--lh-btn);
+  color: inherit;
+  letter-spacing: var(--ls-btn);
+  text-transform: uppercase;
+  cursor: pointer;
+  background: none;
+  border: var(--border-button);
+}

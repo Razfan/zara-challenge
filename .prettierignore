@@ -3,3 +3,8 @@ node_modules
 coverage
 package-lock.json
 next-env.d.ts
+
+# Local files excluded in .git/info/exclude: never committed, so not worth formatting.
+CLAUDE.md
+PLAN.md
+ENTREVISTA.md
