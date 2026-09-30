@@ -1,0 +1,83 @@
+{
+  "id": "XIA-RN13",
+  "brand": "Xiaomi",
+  "name": "Redmi Note 13",
+  "description": "El Xiaomi Redmi Note 13 es un smartphone con una pantalla AMOLED FHD+ de 6.67 pulgadas, procesador Snapdragon 685, y una potente batería de 5000 mAh, ofreciendo un rendimiento equilibrado y una experiencia de usuario fluida con Android.",
+  "basePrice": 169,
+  "rating": 4.4,
+  "specs": {
+    "screen": "6.67\" AMOLED FHD+",
+    "resolution": "FHD+",
+    "processor": "Snapdragon 685",
+    "mainCamera": "No especificada en la información proporcionada",
+    "selfieCamera": "No especificada en la información proporcionada",
+    "battery": "5000 mAh",
+    "os": "Android",
+    "screenRefreshRate": "No especificada en la información proporcionada"
+  },
+  "colorOptions": [
+    {
+      "name": "Mint Green",
+      "hexCode": "#98FF98",
+      "imageUrl": "http://prueba-tecnica-api-tienda-moviles.onrender.com/images/XIA-RN13-mint-green.webp"
+    },
+    {
+      "name": "Azul",
+      "hexCode": "#0000FF",
+      "imageUrl": "http://prueba-tecnica-api-tienda-moviles.onrender.com/images/XIA-RN13-azul.webp"
+    },
+    {
+      "name": "Midnight Black",
+      "hexCode": "#000000",
+      "imageUrl": "http://prueba-tecnica-api-tienda-moviles.onrender.com/images/XIA-RN13-midnight-black.webp"
+    }
+  ],
+  "storageOptions": [
+    { "capacity": "128 GB", "price": 169 },
+    { "capacity": "256 GB", "price": 189 }
+  ],
+  "similarProducts": [
+    {
+      "id": "XMI-RN13P5G",
+      "brand": "Xiaomi",
+      "name": "Redmi Note 13 Pro 5G",
+      "basePrice": 399,
+      "imageUrl": "http://prueba-tecnica-api-tienda-moviles.onrender.com/images/XMI-RN13P5G-midnight-black.webp"
+    },
+    {
+      "id": "GPX-8A",
+      "brand": "Google",
+      "name": "Pixel 8a",
+      "basePrice": 459,
+      "imageUrl": "http://prueba-tecnica-api-tienda-moviles.onrender.com/images/GPX-8A-obsidiana.webp"
+    },
+    {
+      "id": "SNY-XPERIA1V",
+      "brand": "SONY",
+      "name": "Xperia 1 V",
+      "basePrice": 959.42,
+      "imageUrl": "http://prueba-tecnica-api-tienda-moviles.onrender.com/images/SNY-XPERIA1V-negro.webp"
+    },
+    {
+      "id": "XMI-RN13P5G",
+      "brand": "Xiaomi",
+      "name": "Redmi Note 13 Pro 5G",
+      "basePrice": 399,
+      "imageUrl": "http://prueba-tecnica-api-tienda-moviles.onrender.com/images/XMI-RN13P5G-midnight-black.webp"
+    },
+    {
+      "id": "XMI-14",
+      "brand": "Xiaomi",
+      "name": "14",
+      "basePrice": 899,
+      "imageUrl": "http://prueba-tecnica-api-tienda-moviles.onrender.com/images/XMI-14-negro.webp"
+    },
+    {
+      "id": "SMG-A25",
+      "brand": "Samsung",
+      "name": "Galaxy A25 5G",
+      "basePrice": 239,
+      "imageUrl": "http://prueba-tecnica-api-tienda-moviles.onrender.com/images/SMG-A25-negro.webp"
+    }
+  ]
+}
