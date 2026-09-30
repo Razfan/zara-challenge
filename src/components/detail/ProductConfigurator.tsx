@@ -1,11 +1,12 @@
 'use client';
 
-import Image from 'next/image';
 import { useState } from 'react';
 import type { ColorOption, Product, StorageOption } from '@/lib/types';
 import { formatPrice } from '@/lib/utils';
 import { AddToCartButton } from './AddToCartButton';
+import { AnimatedText } from './AnimatedText';
 import { ColorSelector } from './ColorSelector';
+import { ProductImage } from './ProductImage';
 import { StorageSelector } from './StorageSelector';
 import styles from './ProductConfigurator.module.scss';
 
@@ -26,14 +27,9 @@ export function ProductConfigurator({ product }: ProductConfiguratorProps) {
     <div className={styles.configurator}>
       <div className={styles.imageWrapper}>
         {shownColor && (
-          <Image
-            key={shownColor.imageUrl}
+          <ProductImage
             src={shownColor.imageUrl}
             alt={`${product.brand} ${product.name}, ${shownColor.name}`}
-            fill
-            sizes="(min-width: 768px) 40vw, 100vw"
-            priority
-            className={styles.image}
           />
         )}
       </div>
@@ -41,7 +37,7 @@ export function ProductConfigurator({ product }: ProductConfiguratorProps) {
         <div className={styles.heading}>
           <h1 className={styles.name}>{product.name}</h1>
           <p className={styles.price} aria-live="polite" aria-atomic="true">
-            {price}
+            <AnimatedText value={price} />
           </p>
         </div>
         <div className={styles.selectors}>

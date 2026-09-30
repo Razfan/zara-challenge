@@ -18,6 +18,10 @@ function Harness() {
 
 const LABEL = 'Color. pick your favourite.';
 
+// While a character animates, the name is split into several text nodes (AnimatedText).
+const nameText = (text: string) => (_: string, element: Element | null) =>
+  element?.tagName === 'P' && element.textContent === text;
+
 describe('ColorSelector', () => {
   it('presents the colors as a labelled radio group named by each color', () => {
     render(<Harness />);
@@ -56,6 +60,20 @@ describe('ColorSelector', () => {
     rerender(<ColorSelector options={options} selected={options[1]} onSelect={onSelect} />);
     expect(screen.getByText('Titanium Black', { selector: 'p' })).toBeInTheDocument();
     expect(screen.getByRole('radio', { name: 'Titanium Black' })).toBeChecked();
+  });
+
+  it('animates the characters that change when the selected color name changes', () => {
+    const { rerender } = render(
+      <ColorSelector options={options} selected={options[0]} onSelect={jest.fn()} />,
+    );
+
+    rerender(<ColorSelector options={options} selected={options[1]} onSelect={jest.fn()} />);
+
+    const changed = screen.queryAllByText(
+      (_, element) => element?.hasAttribute('data-previous') ?? false,
+    );
+    expect(changed.length).toBeGreaterThan(0);
+    expect(screen.getByText(nameText('Titanium Black'))).toBeInTheDocument();
   });
 
   it('is keyboard navigable with Tab and arrow keys', async () => {

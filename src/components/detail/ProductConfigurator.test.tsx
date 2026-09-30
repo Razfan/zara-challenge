@@ -42,6 +42,10 @@ const product: Product = {
 const renderConfigurator = () =>
   render(<ProductConfigurator product={product} />, { wrapper: CartProvider });
 
+// While a digit animates, the price is split into several text nodes (AnimatedText).
+const priceText = (text: string) => (_: string, element: Element | null) =>
+  element?.tagName === 'P' && element.textContent === text;
+
 describe('ProductConfigurator', () => {
   it('shows the device name as the main heading', () => {
     renderConfigurator();
@@ -56,7 +60,7 @@ describe('ProductConfigurator', () => {
 
     await userEvent.click(screen.getByRole('radio', { name: '1 TB' }));
 
-    expect(screen.getByText('1529 EUR')).toBeInTheDocument();
+    expect(screen.getByText(priceText('1529 EUR'))).toBeInTheDocument();
     expect(screen.queryByText(/From/)).not.toBeInTheDocument();
   });
 

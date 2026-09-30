@@ -31,19 +31,6 @@
   }
 }
 
-// The selected color's image fades in; the reduced-motion global rule turns it into
-// an instant swap. Remounted on every color change, so there is no image to fade out.
-.image {
-  object-fit: contain;
-  animation: fade-in var(--duration-slow) var(--easing);
-}
-
-@keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-}
-
 .info {
   display: flex;
   flex-direction: column;

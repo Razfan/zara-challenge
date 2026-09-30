@@ -2,6 +2,7 @@
 
 import { useId } from 'react';
 import type { ColorOption } from '@/lib/types';
+import { AnimatedText } from './AnimatedText';
 import styles from './ColorSelector.module.scss';
 
 type ColorSelectorProps = {
@@ -39,7 +40,11 @@ export function ColorSelector({ options, selected, onSelect }: ColorSelectorProp
           </label>
         ))}
       </div>
-      {selected && <p className={styles.selectedName}>{selected.name}</p>}
+      {selected && (
+        <p className={styles.selectedName}>
+          <AnimatedText value={selected.name} />
+        </p>
+      )}
     </fieldset>
   );
 }

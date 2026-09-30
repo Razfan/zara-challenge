@@ -1,0 +1,14 @@
+// Opacity only; the global reduced-motion rule turns it into an instant swap.
+.image {
+  object-fit: contain;
+  transition: opacity var(--duration-slow) var(--easing);
+
+  // Stacked by z-index, not DOM order: moving a node would cancel its transition.
+  &[data-current='true'] {
+    z-index: 1;
+  }
+
+  &[data-visible='false'] {
+    opacity: 0;
+  }
+}

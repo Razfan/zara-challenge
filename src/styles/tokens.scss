@@ -66,6 +66,7 @@
   --swatch-size: 20px;
   --specs-label-width: 300px;
   --carousel-card-size: min(344px, 80vw);
+  --carousel-thumb-width: 150px;
 
   // Cart (Figma cart frame)
   --cart-image-width: 262px;
@@ -75,7 +76,7 @@
   --cart-footer-gap: 80px;
 
   --duration: 300ms;
-  --duration-slow: 600ms; // prototype transitions: color image, grid FLIP
+  --duration-slow: 600ms; // prototype transitions: price, color name/image, grid FLIP
   --easing: ease-out;
 
   @include bp(tablet) {

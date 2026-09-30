@@ -1,0 +1,31 @@
+// Opacity only; the global reduced-motion rule turns it into an instant swap.
+.changed {
+  position: relative;
+  display: inline-block;
+
+  // The replaced character, fading out underneath. Empty alternative text keeps it
+  // out of what assistive technologies read.
+  &::before {
+    position: absolute;
+    left: 0;
+    content: attr(data-previous);
+    content: attr(data-previous) / '';
+    animation: fade-out var(--duration-slow) var(--easing) forwards;
+  }
+}
+
+.next {
+  animation: fade-in var(--duration-slow) var(--easing) both;
+}
+
+@keyframes fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
