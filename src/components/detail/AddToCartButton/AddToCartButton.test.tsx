@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { useRouter } from 'next/navigation';
 import { CartProvider, useCart } from '@/context/CartContext';
+import { NavigationProgressProvider } from '@/context/NavigationProgressContext';
 import type { ColorOption, Product, StorageOption } from '@/lib/types';
 import { AddToCartButton } from './AddToCartButton';
 
@@ -53,8 +54,10 @@ function CartProbe() {
 const renderButton = (storage?: StorageOption, color?: ColorOption) =>
   render(
     <CartProvider>
-      <AddToCartButton product={product} storage={storage} color={color} />
-      <CartProbe />
+      <NavigationProgressProvider>
+        <AddToCartButton product={product} storage={storage} color={color} />
+        <CartProbe />
+      </NavigationProgressProvider>
     </CartProvider>,
   );
 

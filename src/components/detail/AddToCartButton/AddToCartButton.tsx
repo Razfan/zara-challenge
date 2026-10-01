@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useId } from 'react';
 import { useCart } from '@/context/CartContext';
+import { useNavigationProgress } from '@/hooks/useNavigationProgress';
 import type { ColorOption, Product, StorageOption } from '@/lib/types';
 import styles from './AddToCartButton.module.scss';
 
@@ -18,6 +19,7 @@ type AddToCartButtonProps = {
 export function AddToCartButton({ product, storage, color }: AddToCartButtonProps) {
   const { add } = useCart();
   const router = useRouter();
+  const { startTransition } = useNavigationProgress();
   const hintId = useId();
   const ready = storage !== undefined && color !== undefined;
 
@@ -31,7 +33,8 @@ export function AddToCartButton({ product, storage, color }: AddToCartButtonProp
       color: { name: color.name, hexCode: color.hexCode },
       storage,
     });
-    router.push('/cart');
+    // Shared transition: the same LoadingBar used by SearchBar shows while /cart loads.
+    startTransition(() => router.push('/cart'));
   };
 
   return (
