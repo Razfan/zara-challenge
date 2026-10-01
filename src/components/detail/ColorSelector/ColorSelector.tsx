@@ -2,7 +2,7 @@
 
 import { useId } from 'react';
 import type { ColorOption } from '@/lib/types';
-import { AnimatedText } from './AnimatedText';
+import { AnimatedText } from '../AnimatedText';
 import styles from './ColorSelector.module.scss';
 
 type ColorSelectorProps = {

@@ -1,6 +1,6 @@
 import type { ProductListItem } from '@/lib/types';
-import { FlipList } from './FlipList';
-import { ProductCard } from './ProductCard';
+import { FlipList } from '../FlipList';
+import { ProductCard } from '../ProductCard';
 import styles from './ProductGrid.module.scss';
 
 /**

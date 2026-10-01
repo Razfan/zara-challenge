@@ -1,4 +1,4 @@
-@use '../../styles/mixins' as *;
+@use '../../../styles/mixins' as *;
 
 // Each cell draws its right and bottom border; the grid adds top and left so every
 // line is 0.5px, including a partial last row.
