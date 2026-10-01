@@ -2,7 +2,7 @@
 
 Aplicación web para consultar un catálogo de teléfonos móviles, buscar por marca o modelo, ver el detalle de cada producto y gestionar un carrito persistente.
 
-**Demo:** _pendiente de desplegar_
+**Demo:** [zara-challenge](https://zara-challenge-three.vercel.app/)
 
 | Listado                                                            | Detalle                                                                                         |
 | ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
@@ -17,6 +17,8 @@ Aplicación web para consultar un catálogo de teléfonos móviles, buscar por m
 El código prioriza la simplicidad sobre la flexibilidad especulativa: se implementa lo que pide el enunciado y el diseño de Figma, sin abstracciones genéricas para casos hipotéticos ni infraestructura que ningún requisito necesita todavía (más detalle en [Testing y calidad](#testing-y-calidad)). Es más fácil de auditar y razonar sobre él, y en una prueba de alcance cerrado y plazo corto eso importa más que preparar el terreno para requisitos que no existen.
 
 Por el mismo motivo no se usa desarrollo dirigido por especificaciones (SDD): documentar cada requisito con un ID propio, decisiones en ADRs y trazabilidad explícita entre requisito, código y test. En un proyecto real, con varios equipos trabajando en paralelo durante meses y requisitos que cambian, esa trazabilidad es lo que permite saber por qué existe una decisión sin depender de la memoria de quien la tomó, y evita que dos personas interpreten el mismo requisito de formas distintas. Aquí el enunciado y el diseño ya cumplen ese papel de especificación única: documentarlos otra vez en un formato aparte duplicaría la misma información sin la trazabilidad que la justificaría.
+
+Algunas decisiones de interacción —la animación de reordenado del listado, el debounce del buscador, la hidratación diferida del carrito— no salen de prueba y error en este ejercicio: ya estaban resueltas y probadas de antes, así que se mantienen tal cual en vez de reabrir ese diseño.
 
 ## Cómo ejecutar
 
@@ -74,12 +76,12 @@ Cada componente con lógica lleva su test al lado (`X.test.tsx`).
 
 ## Despliegue
 
-Desplegado en Vercel. Variables de entorno necesarias en el proyecto: `API_KEY`.
+Desplegado en Vercel. Variables de entorno necesarias en el proyecto: `API_KEY`. El proyecto exige Node ≥ 18.18, pero en Vercel se ejecuta con Node 24 por compatibilidad con su entorno de build.
 
 ## Mejoras futuras
 
 - Checkout real tras "PAY": resumen, formulario de pago y vaciado del carrito.
 - Selector de cantidad en el carrito, agrupando líneas idénticas.
-- Sincronizar el carrito entre pestañas con el evento `storage`.
+- Sincronizar el carrito entre pestañas con el evento `storage`: ahora mismo, si se añade un producto distinto en cada una de dos pestañas abiertas a la vez, la que guarda en segundo lugar sobrescribe a la primera y uno de los dos productos no se llega a guardar.
 - Tests end-to-end (Playwright) sobre el flujo completo de compra.
 - Integración continua (GitHub Actions) con typecheck, lint, test y build en cada push.
