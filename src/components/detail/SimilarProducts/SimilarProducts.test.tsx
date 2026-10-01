@@ -1,6 +1,7 @@
 import { fireEvent, render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
+import { ProductCard } from '@/components/product/ProductCard';
 import type { ProductListItem } from '@/lib/types';
 import { SimilarProducts } from './SimilarProducts';
 
@@ -14,7 +15,13 @@ const makeProducts = (count: number): ProductListItem[] =>
   }));
 
 const renderSimilar = (products = makeProducts(6)) =>
-  render(<SimilarProducts products={products} />);
+  render(
+    <SimilarProducts>
+      {products.map((product) => (
+        <ProductCard key={product.id} product={product} />
+      ))}
+    </SimilarProducts>,
+  );
 
 const carousel = () => screen.getByRole('region', { name: 'SIMILAR ITEMS' });
 
@@ -51,7 +58,7 @@ describe('SimilarProducts', () => {
   });
 
   it('renders nothing without similar products', () => {
-    const { container } = render(<SimilarProducts products={[]} />);
+    const { container } = render(<SimilarProducts>{null}</SimilarProducts>);
 
     expect(container).toBeEmptyDOMElement();
   });

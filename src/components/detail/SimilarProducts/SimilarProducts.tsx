@@ -1,19 +1,21 @@
 'use client';
 
-import { useEffect, useId, useRef, type PointerEvent } from 'react';
-import { ProductCard } from '@/components/product/ProductCard';
+import { Children, useEffect, useId, useRef, type PointerEvent, type ReactNode } from 'react';
 import { scrollLeftFor, scrollProgress } from '@/lib/utils';
-import type { ProductListItem } from '@/lib/types';
 import styles from './SimilarProducts.module.scss';
 
-type SimilarProductsProps = { products: readonly ProductListItem[] };
+type SimilarProductsProps = { children: ReactNode };
 
 /**
  * "SIMILAR ITEMS" carousel: native horizontal scroll with snap, so touch, trackpad and
  * keyboard (the region is focusable) work as usual. The native scrollbar is hidden for the
  * Figma 1px bar: pressing it scrolls smoothly and its thumb can be dragged.
+ *
+ * Only the carousel mechanics need the client: the cards themselves are passed in as
+ * `children` so the page can render them as Server Components, same as `ProductGrid` does
+ * with `FlipList`.
  */
-export function SimilarProducts({ products }: SimilarProductsProps) {
+export function SimilarProducts({ children }: SimilarProductsProps) {
   const titleId = useId();
   const carouselRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
@@ -73,7 +75,7 @@ export function SimilarProducts({ products }: SimilarProductsProps) {
     if (carouselRef.current) delete carouselRef.current.dataset.dragging;
   };
 
-  if (products.length === 0) return null;
+  if (Children.count(children) === 0) return null;
 
   return (
     <section className={styles.similar}>
@@ -88,11 +90,7 @@ export function SimilarProducts({ products }: SimilarProductsProps) {
         // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- lets arrow keys scroll it
         tabIndex={0}
       >
-        <ul className={styles.list}>
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </ul>
+        <ul className={styles.list}>{children}</ul>
       </div>
       <div
         ref={progressRef}

@@ -1,20 +1,24 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, type ReactNode } from 'react';
 import type { ColorOption, Product, StorageOption } from '@/lib/types';
 import { formatPrice } from '@/lib/utils';
-import { AddToCartButton } from './AddToCartButton';
-import { AnimatedText } from './AnimatedText';
-import { ColorSelector } from './ColorSelector';
-import { ProductImage } from './ProductImage';
-import { StorageSelector } from './StorageSelector';
+import { AddToCartButton } from '../AddToCartButton';
+import { AnimatedText } from '../AnimatedText';
+import { ColorSelector } from '../ColorSelector';
+import { ProductImage } from '../ProductImage';
+import { StorageSelector } from '../StorageSelector';
 import styles from './ProductConfigurator.module.scss';
 
-type ProductConfiguratorProps = { product: Product };
+type ProductConfiguratorProps = {
+  product: Product;
+  /** The `<h1>`: static, so the page renders it and this client component only places it. */
+  heading: ReactNode;
+};
 
 /** Image, name, price and selectors of the detail page. The selection is local and
  * ephemeral (not in Context); price and image are derived from it. */
-export function ProductConfigurator({ product }: ProductConfiguratorProps) {
+export function ProductConfigurator({ product, heading }: ProductConfiguratorProps) {
   const [storage, setStorage] = useState<StorageOption>();
   const [color, setColor] = useState<ColorOption>();
 
@@ -35,7 +39,7 @@ export function ProductConfigurator({ product }: ProductConfiguratorProps) {
       </div>
       <div className={styles.info}>
         <div className={styles.heading}>
-          <h1 className={styles.name}>{product.name}</h1>
+          {heading}
           <p className={styles.price} aria-live="polite" aria-atomic="true">
             <AnimatedText value={price} />
           </p>

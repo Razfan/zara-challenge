@@ -3,6 +3,8 @@ import { BackLink } from '@/components/detail/BackLink';
 import { ProductConfigurator } from '@/components/detail/ProductConfigurator';
 import { SimilarProducts } from '@/components/detail/SimilarProducts';
 import { SpecsTable } from '@/components/detail/SpecsTable';
+import configuratorStyles from '@/components/detail/ProductConfigurator/ProductConfigurator.module.scss';
+import { ProductCard } from '@/components/product/ProductCard';
 import { getProductById } from '@/lib/products';
 import styles from './page.module.scss';
 
@@ -20,9 +22,16 @@ export default async function ProductPage({ params }: ProductPageProps) {
     <div>
       <BackLink />
       <div className={styles.content}>
-        <ProductConfigurator product={product} />
+        <ProductConfigurator
+          product={product}
+          heading={<h1 className={configuratorStyles.name}>{product.name}</h1>}
+        />
         <SpecsTable product={product} />
-        <SimilarProducts products={product.similarProducts} />
+        <SimilarProducts>
+          {product.similarProducts.map((item) => (
+            <ProductCard key={item.id} product={item} />
+          ))}
+        </SimilarProducts>
       </div>
     </div>
   );

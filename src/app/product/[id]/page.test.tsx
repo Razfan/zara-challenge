@@ -1,9 +1,19 @@
 import { render, screen } from '@testing-library/react';
 import { notFound, useRouter } from 'next/navigation';
+import type { ReactNode } from 'react';
 import { CartProvider } from '@/context/CartContext';
+import { NavigationProgressProvider } from '@/context/NavigationProgressContext';
 import { getProductById } from '@/lib/products';
 import type { Product } from '@/lib/types';
 import ProductPage from './page';
+
+function Providers({ children }: { children: ReactNode }) {
+  return (
+    <CartProvider>
+      <NavigationProgressProvider>{children}</NavigationProgressProvider>
+    </CartProvider>
+  );
+}
 
 jest.mock('next/navigation', () => ({
   useRouter: jest.fn(),
@@ -56,7 +66,7 @@ describe('ProductPage (app/product/[id]/page.tsx)', () => {
   it('renders the product: heading, specs and similar items', async () => {
     getProductByIdMock.mockResolvedValue(product);
 
-    render(await ProductPage(params('SMG-S24U')), { wrapper: CartProvider });
+    render(await ProductPage(params('SMG-S24U')), { wrapper: Providers });
 
     expect(getProductByIdMock).toHaveBeenCalledWith('SMG-S24U');
     expect(screen.getByRole('heading', { level: 1, name: 'Galaxy S24 Ultra' })).toBeInTheDocument();

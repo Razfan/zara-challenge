@@ -2,7 +2,9 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { useRouter } from 'next/navigation';
+import type { ReactNode } from 'react';
 import { CartProvider } from '@/context/CartContext';
+import { NavigationProgressProvider } from '@/context/NavigationProgressContext';
 import type { Product } from '@/lib/types';
 import { ProductConfigurator } from './ProductConfigurator';
 
@@ -39,8 +41,18 @@ const product: Product = {
   similarProducts: [],
 };
 
+function Providers({ children }: { children: ReactNode }) {
+  return (
+    <CartProvider>
+      <NavigationProgressProvider>{children}</NavigationProgressProvider>
+    </CartProvider>
+  );
+}
+
 const renderConfigurator = () =>
-  render(<ProductConfigurator product={product} />, { wrapper: CartProvider });
+  render(<ProductConfigurator product={product} heading={<h1>{product.name}</h1>} />, {
+    wrapper: Providers,
+  });
 
 // While a digit animates, the price is split into several text nodes (AnimatedText).
 const priceText = (text: string) => (_: string, element: Element | null) =>
