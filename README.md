@@ -47,23 +47,27 @@ La clave de la API (`x-api-key`) solo se usa en el servidor y nunca llega al nav
 src/
   app/            # Rutas (Next.js App Router): listado, detalle, carrito, loading/error/not-found
   components/
-    layout/       # Navbar, logo, icono y contador del carrito
+    layout/       # Navbar (con su logo e icono de bolsa) y la barra de carga
     product/      # Tarjeta, grid, buscador, contador de resultados
     detail/       # Selectores de color/almacenamiento, precio e imagen animados, specs, similares
     cart/         # Línea de carrito y resumen
+                  # Cada componente vive en su propia carpeta junto a su test y su .module.scss
+                  # (un icono usado por un único componente vive dentro de esa misma carpeta)
   context/        # CartContext (useReducer + persistencia en localStorage)
-  hooks/          # useDebounce, useFlip, useExitAnimation, usePreviousValue...
+  hooks/          # useDebounce, useFlip, useExitAnimation, usePreviousValue... (cada uno en su carpeta, con su test)
   lib/            # api.ts (fetch server-only), products.ts (mapeo de la API), types.ts, utils.ts
   styles/         # tokens.scss (variables CSS), mixins de breakpoints, estilos globales
 ```
 
-Cada componente con lógica lleva su test al lado (`X.test.tsx`).
+Cada carpeta de componente expone un `index.ts` que reexporta el componente, así el resto del código lo importa igual que a un fichero suelto (`@/components/detail/ColorSelector`).
 
 ## Decisiones técnicas
 
 - **Next.js App Router con SSR.** El listado y el detalle se renderizan en el servidor: la clave de la API nunca sale de ahí y el despliegue es nativo en Vercel.
 - **Clave de API solo en servidor.** `lib/api.ts` importa `server-only`: si algún Client Component llegara a importarlo, el build falla. La variable de entorno no lleva prefijo `NEXT_PUBLIC_`, así que en el navegador ni siquiera existiría.
 - **Búsqueda en la URL, filtrada por la API.** `?search=` se envía tal cual a la API (no se filtra en el cliente), así que el resultado es compartible, funciona sin JavaScript y se renderiza en el servidor.
+- **Cliente solo donde hace falta.** `ProductConfigurator` y `SimilarProducts` son client components porque mantienen estado o gestionan gestos, pero las partes que no dependen de eso (el nombre del producto, las tarjetas de productos similares) se renderizan en el servidor y llegan como `children`, igual que ya hace `ProductGrid` con `FlipList` en el listado.
+- **Una sola transición para toda navegación de cliente.** Buscar y añadir al carrito comparten el mismo `useTransition` (`NavigationProgressContext`), así la barra de carga refleja cualquier navegación en curso en vez de solo una de ellas.
 - **Carrito con Context + `useReducer`.** Es el único estado que de verdad se comparte entre pantallas (navbar, detalle, carrito). Se persiste en `localStorage`, pero la carga ocurre en un `useEffect` tras montar para no romper la hidratación (servidor y primer render de cliente no tienen acceso a `localStorage`).
 - **SCSS Modules con variables CSS.** Funcionan en Server Components sin coste de runtime (a diferencia de librerías CSS-in-JS, que exigirían marcar más componentes como cliente). Los tokens de Figma (colores, tipografía, espaciados, duraciones) viven como custom properties en `styles/tokens.scss`.
 
